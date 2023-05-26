@@ -17,7 +17,7 @@ const isProduction = !isDev;
 
 // ENABLE HMR IN BACKGROUND SCRIPT
 const enableHmrInBackgroundScript = true;
-
+const inputFileList = [];
 export default defineConfig({
   resolve: {
     alias: {
@@ -45,16 +45,16 @@ export default defineConfig({
     rollupOptions: {
       input: {
         devtools: resolve(pagesDir, "devtools", "index.html"),
-        panel: resolve(pagesDir, "panel", "index.html"),
         content: resolve(pagesDir, "content", "index.ts"),
         background: resolve(pagesDir, "background", "index.ts"),
         contentStyle: resolve(pagesDir, "content", "style.scss"),
         popup: resolve(pagesDir, "popup", "index.html"),
-        newtab: resolve(pagesDir, "newtab", "index.html"),
-        options: resolve(pagesDir, "options", "index.html"),
+        // panel: resolve(pagesDir, "panel", "index.html"),
+        // newtab: resolve(pagesDir, "newtab", "index.html"),
+        // options: resolve(pagesDir, "options", "index.html"),
       },
       watch: {
-        include: ["src/**", "vite.config.ts"],
+        include: ["src/**","manifast.json", "vite.config.ts"],
         exclude: ["node_modules/**", "src/**/*.spec.ts"],
       },
       output: {
