@@ -1,6 +1,8 @@
 import React from "react";
 import logo from "@assets/img/logo.svg";
 import "@pages/popup/Popup.css";
+import "@pages/content/style.scss";
+import App from '@src/pages/content/components/App'
 
 const Popup = () => {
   return (
@@ -19,6 +21,7 @@ const Popup = () => {
           Learn React!
         </a>
       </header>
+      <App />
     </div>
   );
 };

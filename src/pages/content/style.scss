@@ -3,3 +3,60 @@
 .content-view {
   font-size: 30px;
 }
+
+.tl-container{
+  width: 2px;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  z-index: 999;
+}
+.modalShow{
+  width: 400px;
+  z-index: 999;
+  background: rgba(255, 255, 255,1);
+  box-shadow: 0 0 10px rgba(0,0,0,0.7);
+  padding-left: 10px;
+}
+.tip{
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  right: 0;
+  top: 120px;
+  z-index: 998;
+  border-radius: 15px 0 0 15px ;
+  overflow: hidden;
+  cursor: pointer;
+  background: linear-gradient(to left, skyblue, #eee);
+  font-size: 20px;
+  color: white;
+  text-align: right;
+  line-height: 30px;
+  padding-right: 10px;
+
+  img{
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.tl-header{
+  height: 60px;
+  line-height: 60px;
+  font-size: 30px;
+
+  .header-close-icon{
+    width: 60px;
+    text-align: center;
+    line-height: 60px;
+    cursor: pointer;
+  }
+
+  .header-title{
+
+  }
+}

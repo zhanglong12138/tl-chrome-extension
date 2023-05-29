@@ -5,6 +5,7 @@ import makeManifest from "./utils/plugins/make-manifest";
 import customDynamicImport from "./utils/plugins/custom-dynamic-import";
 import addHmr from "./utils/plugins/add-hmr";
 import manifest from "./manifest";
+import {createStyleImportPlugin} from "vite-plugin-style-import";
 
 const root = resolve(__dirname, "src");
 const pagesDir = resolve(root, "pages");
@@ -32,6 +33,15 @@ export default defineConfig({
       isDev,
       contentScriptCssKey: regenerateCacheInvalidationKey(),
     }),
+    // createStyleImportPlugin({
+    //   libs: [
+    //     {
+    //       libraryName: "antd",
+    //       esModule: true,
+    //       resolveStyle: (name) => `antd/es/${name}/style/css`,
+    //     },
+    //   ],
+    // }),
     customDynamicImport(),
     addHmr({ background: enableHmrInBackgroundScript, view: true }),
   ],
@@ -47,6 +57,7 @@ export default defineConfig({
         devtools: resolve(pagesDir, "devtools", "index.html"),
         content: resolve(pagesDir, "content", "index.ts"),
         background: resolve(pagesDir, "background", "index.ts"),
+        // contentIndex: resolve(pagesDir, "content", "index.less"),
         contentStyle: resolve(pagesDir, "content", "style.scss"),
         popup: resolve(pagesDir, "popup", "index.html"),
         // panel: resolve(pagesDir, "panel", "index.html"),
