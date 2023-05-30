@@ -1,4 +1,3 @@
-// import chrome from 'chrome'
 function getIStorageSync(key){
   return new Promise((resolve,reject)=>{
     chrome.storage.local.get([`${key}`], function(e) {

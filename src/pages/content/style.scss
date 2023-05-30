@@ -4,23 +4,15 @@
   font-size: 30px;
 }
 
-.tl-container{
-  width: 2px;
+.tiplevel{
+  width: 10px;
   height: 100vh;
   position: fixed;
   right: 0;
   top: 0;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
   z-index: 999;
 }
-.modalShow{
-  width: 400px;
-  z-index: 999;
-  background: rgba(255, 255, 255,1);
-  box-shadow: 0 0 10px rgba(0,0,0,0.7);
-  padding-left: 10px;
-}
+
 .tip{
   width: 30px;
   height: 30px;
@@ -44,19 +36,49 @@
   }
 }
 
-.tl-header{
-  height: 60px;
-  line-height: 60px;
-  font-size: 30px;
+.tl-container{
+  width: 0px;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  z-index: 999;
+  font-family: "宋体";
+  padding:20px 0;
 
-  .header-close-icon{
-    width: 60px;
-    text-align: center;
-    line-height: 60px;
-    cursor: pointer;
+  .tl-header{
+    height: 20px;
+    line-height: 20px;
+    font-size: 20px;
+    margin-bottom: 20px;
+
+    .header-menu-icon{
+      font-size: 16px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    .header-close-icon{
+      width: 20px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .header-title{
+      height: 20px;
+      line-height: 20px;
+      font-size: 20px;
+      text-align: left;
+    }
   }
+}
 
-  .header-title{
-
-  }
+.tl-modalShow{
+  width: 400px;
+  z-index: 999;
+  background: rgba(255, 255, 255,1);
+  padding:20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
