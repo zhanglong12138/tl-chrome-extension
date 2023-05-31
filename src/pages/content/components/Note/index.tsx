@@ -67,17 +67,8 @@ export default function Note() {
 
 
   return <div className="note-card w100 fl fc">
-      <Form form={formRef} labelAlign="left" size="middle" layout="inline">
-        <Form.Item name="keywords">
-          <Input placeholder="请输入关键词" onPressEnter={handleEnter}/>
-        </Form.Item>
-        
-        <Space>
-          <Button type="primary" key="search" onClick={fetchData}>搜索</Button>
-          <Button type="primary" key="insert" onClick={()=>setEditStatus(true)}>新增</Button>
-        </Space>
-      </Form>
-      {editStatus && <div className="component-edit">
+    
+    {editStatus && <div className="component-edit">
         <Form form={editFormRef} labelAlign="left" size="middle" layout="vertical">
           <Form.Item name="key">
             <Input placeholder="记录项"/>
@@ -91,42 +82,54 @@ export default function Note() {
           </Space>
         </Form>
       </div>}
-    <div className="tl-component-content noScroll">
-    {
-      data?.length>0 && data.map(e=>{
-        if(e.contentType=='art'){
-          return <Card size="small" style={{
-            boxShadow:'0 0 10px #eee',
-            marginBottom:'20px',
-            borderRadius:0
-          }}>
-            <a href={"http://blog.zxlucky.com/art?id="+e.id} target="_blank">
-              <Typography.Text strong>{e.name}</Typography.Text>
-            </a>
-            <div className="fl fr" style={{margin:'8px 0'}}>
-              <div><Tag>文章</Tag></div>
-              <i className="tl-time-tag">{e.ctime}</i>
-            </div>
-            
-          </Card>
+      {!editStatus && <>
+        <Form form={formRef} labelAlign="left" size="middle" layout="inline">
+          <Form.Item name="keywords">
+            <Input placeholder="请输入关键词" onPressEnter={handleEnter}/>
+          </Form.Item>
+          
+          <Space>
+            <Button type="primary" key="search" onClick={fetchData}>搜索</Button>
+            <Button type="primary" key="insert" onClick={()=>setEditStatus(true)}>新增</Button>
+          </Space>
+        </Form>
+        <div className="tl-component-content noScroll">
+        {
+          data?.length>0 && data.map(e=>{
+            if(e.contentType=='art'){
+              return <Card size="small" style={{
+                boxShadow:'0 0 10px #eee',
+                marginBottom:'20px',
+                borderRadius:0
+              }}>
+                <a href={"http://blog.zxlucky.com/art?id="+e.id} target="_blank">
+                  <Typography.Text strong>{e.name}</Typography.Text>
+                </a>
+                <div className="fl fr" style={{margin:'8px 0'}}>
+                  <div><Tag>文章</Tag></div>
+                  <i className="tl-time-tag">{e.ctime}</i>
+                </div>
+                
+              </Card>
+            }
+            if(e.contentType=='note'){
+              return <Card size="small" style={{
+                  boxShadow:'0 0 10px #eee',
+                  marginBottom:'20px',
+                  borderRadius:0
+                }}
+              >
+                <Typography.Text strong>{e.key}</Typography.Text>
+                <div className="fl fr" style={{margin:'8px 0'}}>
+                  <div><Tag>杂项</Tag></div>
+                  <i className="tl-time-tag">{e.ctime}</i>
+                </div>
+                <Typography style={{fontSize:'10px',padding:'0 3px'}}>{e.value}</Typography>
+              </Card>
+            }
+          })
         }
-        if(e.contentType=='note'){
-          return <Card size="small" style={{
-              boxShadow:'0 0 10px #eee',
-              marginBottom:'20px',
-              borderRadius:0
-            }}
-          >
-            <Typography.Text strong>{e.key}</Typography.Text>
-            <div className="fl fr" style={{margin:'8px 0'}}>
-              <div><Tag>杂项</Tag></div>
-              <i className="tl-time-tag">{e.ctime}</i>
-            </div>
-            <Typography style={{fontSize:'10px',padding:'0 3px'}}>{e.value}</Typography>
-          </Card>
-        }
-      })
-    }
-    </div>
+        </div>
+      </>}
   </div>
 }
