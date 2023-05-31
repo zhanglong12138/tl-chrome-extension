@@ -3,7 +3,6 @@ import {Form, Input, Button,Divider, Typography } from 'antd'
 import InputArray from './InputArray'
 import globalContext from '../../store/index'
 import { postx } from "./../../utils";
-import { config } from "process";
 export default function Login(props) {
   const globalContextEntity = useContext(globalContext)
   const [formRef] = Form.useForm();
@@ -14,13 +13,11 @@ export default function Login(props) {
 
   const refreshConfigInfo = async ()=>{
     const configInfo = await globalContextEntity.postMessage('getStorage','configInfo')
-    console.log('configInfo', configInfo)
     if(configInfo) {
       configInfo.data = configInfo.data ? json2arr(configInfo.data) : []
       configInfo.headers = configInfo.headers ? json2arr(configInfo.headers) : []
       configInfo.pullData = configInfo.pullData ? json2arr(configInfo.pullData) : []
       configInfo.insertData = configInfo.insertData ? json2arr(configInfo.insertData) : []
-      console.log(configInfo)
       formRef.setFieldsValue({
         ...configInfo
       })
@@ -33,7 +30,6 @@ export default function Login(props) {
     configInfo.headers = arr2json(configInfo.headers)
     configInfo.pullData = arr2json(configInfo.pullData)
     configInfo.insertData = arr2json(configInfo.insertData)
-    console.log(configInfo)
     await globalContextEntity.postMessage('setStorage',{key:'configInfo', value:configInfo})
     props?.returnNote && props.returnNote()
   }

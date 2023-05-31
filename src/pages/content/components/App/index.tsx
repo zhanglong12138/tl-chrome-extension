@@ -1,10 +1,12 @@
 import { useState, useEffect, useMemo,useContext } from 'react'
 import logo from '@assets/img/logo.png'
-import Login from '../Login'
-import Note from '../Note'
 import type { MenuProps } from 'antd';
 import { Dropdown, Space, Modal} from 'antd';
 import {UnorderedListOutlined,ExclamationCircleOutlined,CloseOutlined } from '@ant-design/icons'
+
+import Login from '../Login'
+import Note from '../Note'
+import Help from '../Help';
 import globalContext from '../../store/index'
 
 function App(props) {
@@ -27,21 +29,8 @@ function App(props) {
     setModalShow(false)
   }
 
-  //用户信息部分
-  const logout = async () => {
-    Modal.confirm({
-      title: '确认退出？',
-      icon: <ExclamationCircleOutlined rev/>,
-      content: '退出后将无法接收到推送消息',
-      okText: '确认',
-      cancelText: '取消',
-      onOk: async () => {
-        // await props?.postMessage('removeStorage', 'loginInfo')
-        setLoginInfo(false)
-      },
-    })
-  }
-  const [panelType, setPanelType] = useState<'setting' | 'note' | 'help'>('setting')
+  //panel显示逻辑
+  const [panelType, setPanelType] = useState<'setting' | 'note' | 'help'>('note')
   const openSettingPanel = ()=>{
     setPanelType('setting')
   }
@@ -53,7 +42,6 @@ function App(props) {
   const returnNote = ()=>{
     setPanelType('note')
   }
-  const [loginInfo, setLoginInfo]  = useState<Boolean | Object>(false)
   const items: MenuProps['items'] = useMemo(()=>{
     return [
       {
@@ -67,23 +55,13 @@ function App(props) {
       {
         type: 'divider',
       },
-      // {
-      //   key: 'logout',
-      //   label: <a onClick={logout}>退出</a>,
-      //   disabled: !Boolean(loginInfo),
-      // },
+      {
+        key: 'note',
+        label: <a onClick={returnNote}>返回</a>,
+        disabled: panelType === 'note',
+      },
     ]
-  },[loginInfo])
-
-  useEffect(() => {
-    initApp();
-  },[])
-
-  const initApp = async () => {
-    const loginInfo = await globalContextEntity.postMessage('getStorage', 'loginInfo')
-    setLoginInfo(loginInfo)
-  }
-
+  },[panelType])
 
   return (
     <div className="tl-helper-chrome-extension-frame">
@@ -102,7 +80,7 @@ function App(props) {
         <div className='component-body w100' >
           { panelType=='setting' && <Login returnNote={returnNote} />}
           { panelType=='note' && <Note />}
-          { panelType=='help' && <Note />}
+          { panelType=='help' && <Help returnNote={returnNote} />}
         </div>
       </div>
     </div>

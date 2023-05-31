@@ -27,8 +27,8 @@
   font-size: 20px;
   color: white;
   text-align: right;
-  line-height: 30px;
-  padding-right: 10px;
+  line-height: 35px;
+  padding-right: 6px;
 
   img{
     width: 30px;
@@ -81,4 +81,25 @@
   background: rgba(255, 255, 255,1);
   padding:20px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.note-card{
+  padding: 0 10px;
+}
+
+.tl-component-content{
+  overflow-y: scroll;
+  height: calc(100vh - 130px);
+  margin-top: 20px;
+}
+
+.tl-time-tag{
+  width: 70px;
+  display: block;
+  margin-top: 4px;
+  font-size:8px;
+}
+
+.component-edit{
+  margin:24px 0 0;
 }
