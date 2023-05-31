@@ -65,7 +65,7 @@ export default function Note() {
   }
 
 
-  return <div className="w100 fl fc">
+  return <div className="note-card w100 fl fc">
       <Form form={formRef} labelAlign="left" size="middle" layout="inline">
         <Form.Item name="keywords">
           <Input placeholder="请输入关键词" onPressEnter={handleEnter}/>
@@ -81,7 +81,7 @@ export default function Note() {
           <Form.Item name="key">
             <Input placeholder="记录项"/>
           </Form.Item>
-          <Form.Item name="key">
+          <Form.Item name="value">
             <Input.TextArea placeholder="记录值" onPressEnter={handleInsertEvent}/>
           </Form.Item>
           <Space>
@@ -99,7 +99,7 @@ export default function Note() {
             marginBottom:'20px',
             borderRadius:0
           }}>
-            <a href={"http://blog.zxlucky.com/art?id="+e.id}>
+            <a href={"http://blog.zxlucky.com/art?id="+e.id} target="_blank">
               <Typography.Text strong>{e.name}</Typography.Text>
             </a>
             <div className="fl fr" style={{margin:'8px 0'}}>

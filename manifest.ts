@@ -25,7 +25,7 @@ const manifest: chrome.runtime.ManifestV3 = {
     "16": "16.png",
     "32": "32.png",
     "64": "64.png",
-    "128": "icon-128.png",
+    "128": "128.png",
   },
   content_scripts: [
     {
