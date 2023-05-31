@@ -14,7 +14,7 @@ const manifest: chrome.runtime.ManifestV3 = {
   },
   action: {
     default_popup: "src/pages/popup/index.html",
-    default_icon: "icon-34.png",
+    default_icon: "16.png",
   },
   // options_page: "src/pages/options/index.html",
   // devtools_page: "src/pages/devtools/index.html",
@@ -22,6 +22,9 @@ const manifest: chrome.runtime.ManifestV3 = {
   //   newtab: "src/pages/newtab/index.html",
   // },
   icons: {
+    "16": "16.png",
+    "32": "32.png",
+    "64": "64.png",
     "128": "icon-128.png",
   },
   content_scripts: [
