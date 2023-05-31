@@ -1,25 +1,83 @@
-import { useEffect } from "react";
-import {Form, Input, Button} from 'antd'
-// import {Popconfirm, Select,Radio,Checkbox,Modal,message, Divider,Row, Space} from 'antd'
-import {MinusCircleOutlined, CheckCircleOutlined } from '@ant-design/icons'
+import { useEffect,useState,useContext, useMemo } from "react";
+import {Form, Input, Button,Divider, Typography } from 'antd'
+import InputArray from './InputArray'
+import globalContext from '../../store/index'
+import { postx } from "./../../utils";
+import { config } from "process";
 export default function Login(props) {
-  useEffect(() => {
-    console.log("tl-chrome-extension content script login loaded");
-  }, []);
+  const globalContextEntity = useContext(globalContext)
+  const [formRef] = Form.useForm();
+  useEffect(()=>{   
+    console.log('login loaded')
+    refreshConfigInfo()
+  },[])
 
-  const formExtraObj = { labelCol : { span: 8 }, wrapperCol : { span: 12 }}
+  const refreshConfigInfo = async ()=>{
+    const configInfo = await globalContextEntity.postMessage('getStorage','configInfo')
+    console.log('configInfo', configInfo)
+    if(configInfo) {
+      configInfo.data = configInfo.data ? json2arr(configInfo.data) : []
+      configInfo.headers = configInfo.headers ? json2arr(configInfo.headers) : []
+      configInfo.pullData = configInfo.pullData ? json2arr(configInfo.pullData) : []
+      configInfo.insertData = configInfo.insertData ? json2arr(configInfo.insertData) : []
+      console.log(configInfo)
+      formRef.setFieldsValue({
+        ...configInfo
+      })
+    }
+  }
+
+  const submit = async ()=>{
+    const configInfo = await formRef.validateFields()
+    configInfo.data = arr2json(configInfo.data)
+    configInfo.headers = arr2json(configInfo.headers)
+    configInfo.pullData = arr2json(configInfo.pullData)
+    configInfo.insertData = arr2json(configInfo.insertData)
+    console.log(configInfo)
+    await globalContextEntity.postMessage('setStorage',{key:'configInfo', value:configInfo})
+    props?.returnNote && props.returnNote()
+  }
+
+  const arr2json = (arr)=>{
+    let data = {}
+    if(arr?.length >0) {
+      arr.forEach(item=>{
+        data[item.key] = item.value
+      })
+    }
+    return data
+  }
+
+  const json2arr = (json)=>{
+    let arr = []
+    for(let i in json){
+      arr.push({
+        key:i,
+        value:json[i]
+      })
+    }
+    return arr
+  }
 
   return <div className="w100 fl fc">
-    <Form {...formExtraObj} >
+    <Form form={formRef} labelAlign="left" size="small" layout="vertical">
+      <Typography>全局配置</Typography>
       <Form.Item name="url" label="额外推送URL">
         <Input placeholder="请输入推送地址"/>
       </Form.Item>
       <Form.Item name="data" label="额外data参数">
-        <Input placeholder="请输入推送地址"/>
+        <InputArray />
       </Form.Item>
-      <Form.Item name="header" label="额外header参数">
-        <Input placeholder="请输入推送地址"/>
+      <Form.Item name="headers" label="额外header参数">
+        <InputArray />
       </Form.Item>
+      <Form.Item name="pullData" label="拉取列表参数">
+        <InputArray />
+      </Form.Item>
+      <Form.Item name="insertData" label="注入记录参数">
+        <InputArray />
+      </Form.Item>
+     <Button type="primary" onClick={submit}>确认配置</Button>
     </Form>
   </div>
 }

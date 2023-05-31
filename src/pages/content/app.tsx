@@ -1,18 +1,17 @@
 import { createRoot } from "react-dom/client";
 import App from "@src/pages/content/components/App";
 import refreshOnUpdate from "virtual:reload-on-update-in-view";
-// import logo from '@assets/img/logo.png'
-import {getIStorageSync,setIStorageSync,removeIStorageSync} from  './utils'
+import React from 'react'
+import {getIStorageSync,setIStorageSync,removeIStorageSync, postx} from  './utils'
+import globalContext from './store/index'
 
-console.log(chrome.storage)
 refreshOnUpdate("pages/content");
 
 const root = document.createElement("div");
 root.id = "tl-helper-chrome-extension";
 document.body.append(root);
 
-const handleSendMessage = async (action:string, data:String | Object, callback:Function=null) => {
-  // console.log(action,data)
+const handleSendMessage = async (action:string, data:String | any, callback:Function=null) => {
   let result;
   if(action === 'getStorage'){
     result = getIStorageSync(data)
@@ -24,10 +23,23 @@ const handleSendMessage = async (action:string, data:String | Object, callback:F
     result = removeIStorageSync(data)
   }
   if(callback){
+    console.log(callback)
     callback(result)
   }else{
     return result
   }
 }
 
-createRoot(root).render(<App storage={chrome.storage} postMessage = {handleSendMessage}/>);
+const ComponentApp = () => {
+  const sharedData = {
+    postx,
+    postMessage:handleSendMessage
+  };
+  return (
+    <globalContext.Provider value={sharedData}>
+      <App storage={chrome.storage} />
+    </globalContext.Provider>
+  );
+};
+
+createRoot(root).render(<ComponentApp />);

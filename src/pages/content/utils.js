@@ -22,14 +22,21 @@ function removeIStorageSync(key){
   })
 }
 
-function postx(data) {
+function postx({
+  url="",
+  data,
+  headers
+}) {
   return  new Promise((resolve,reject)=>{
     var formData = new FormData();
     for (var i in data) {
       formData.append(i, data[i]);
     }
     var xhr = new XMLHttpRequest();
-    xhr.open("post", "http://blog.zxlucky.com/interface/");
+    xhr.open("post", url);
+    for (var i in headers) {
+      xhr.setRequestHeader(i, headers[i]);
+    }
     xhr.send(formData);
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4) {

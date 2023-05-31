@@ -1,15 +1,14 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo,useContext } from 'react'
 import logo from '@assets/img/logo.png'
 import Login from '../Login'
 import Note from '../Note'
 import type { MenuProps } from 'antd';
 import { Dropdown, Space, Modal} from 'antd';
-// import {observer} from 'mobx-react';
 import {UnorderedListOutlined,ExclamationCircleOutlined,CloseOutlined } from '@ant-design/icons'
-
+import globalContext from '../../store/index'
 
 function App(props) {
-
+  const globalContextEntity = useContext(globalContext)
   //modal显示逻辑
   const [modalShow, setModalShow] = useState(false)
   const [modalShowAlways, setModalShowAlways] = useState(false)
@@ -37,22 +36,25 @@ function App(props) {
       okText: '确认',
       cancelText: '取消',
       onOk: async () => {
-        await props?.postMessage('removeStorage', 'loginInfo')
+        // await props?.postMessage('removeStorage', 'loginInfo')
         setLoginInfo(false)
       },
     })
   }
-
+  const [panelType, setPanelType] = useState<'setting' | 'note' | 'help'>('setting')
   const openSettingPanel = ()=>{
-    
+    setPanelType('setting')
   }
 
   const openHelp = ()=>{
-    
+    setPanelType('help')
+  }
+
+  const returnNote = ()=>{
+    setPanelType('note')
   }
   const [loginInfo, setLoginInfo]  = useState<Boolean | Object>(false)
   const items: MenuProps['items'] = useMemo(()=>{
-    console.log('loginInfo', Boolean(loginInfo), loginInfo)
     return [
       {
         key: 'settings',
@@ -65,11 +67,11 @@ function App(props) {
       {
         type: 'divider',
       },
-      {
-        key: 'logout',
-        label: <a onClick={logout}>退出</a>,
-        disabled: !Boolean(loginInfo),
-      },
+      // {
+      //   key: 'logout',
+      //   label: <a onClick={logout}>退出</a>,
+      //   disabled: !Boolean(loginInfo),
+      // },
     ]
   },[loginInfo])
 
@@ -78,14 +80,14 @@ function App(props) {
   },[])
 
   const initApp = async () => {
-    const loginInfo = await props?.postMessage('getStorage', 'loginInfo')
+    const loginInfo = await globalContextEntity.postMessage('getStorage', 'loginInfo')
     setLoginInfo(loginInfo)
   }
 
 
   return (
     <div className="tl-helper-chrome-extension-frame">
-      <div className="tip" onClick={onMouseOver}>T</div>
+      <div className="tl-tip" onClick={onMouseOver}>T</div>
       <div className="tiplevel" onMouseOver={onMouseOver} ></div>
       <div className={`tl-container ${(modalShowAlways || modalShow) ? 'tl-modalShow' : ''}`} onMouseLeave={onMouseLeave} onClick={() => setModalShowAlways(true)}>
         <div className="tl-header fl fr blueColor w100" >
@@ -98,8 +100,9 @@ function App(props) {
           <div className="header-close-icon fl fac fjc"  onClick={closeModal}><CloseOutlined rev /></div>
         </div>
         <div className='component-body w100' >
-          { !loginInfo && <Login />}
-          { loginInfo && <Note />}
+          { panelType=='setting' && <Login returnNote={returnNote} />}
+          { panelType=='note' && <Note />}
+          { panelType=='help' && <Note />}
         </div>
       </div>
     </div>
