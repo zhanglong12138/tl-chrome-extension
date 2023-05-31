@@ -59,6 +59,7 @@ export default function Note() {
     if(res?.status==1){
       message.success('提交成功')
       editFormRef.resetFields()
+      setEditStatus(false)
     }else{
       message.error(res?.message || '操作失败')
     }
