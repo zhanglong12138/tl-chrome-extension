@@ -20,6 +20,10 @@ function App(props) {
   const handleKeyDown = (e)=>{
     //Ctrl+Q 或 Ctrl + I 新增操作
     if((e.ctrlKey && e.keyCode==81) || (e.ctrlKey && e.keyCode==73)){
+      if(modalShowAlways){
+        setModalShowAlways(false)
+        return
+      }
       setModalShowAlways(true)
       setPanelType('note')
       noteRef.current.search()
