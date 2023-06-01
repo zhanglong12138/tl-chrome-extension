@@ -18,7 +18,6 @@ function App(props) {
   }, []);
   const noteRef = useRef(null)
   const handleKeyDown = (e)=>{
-    console.log(e)
     //Ctrl+Q 或 Ctrl + I 新增操作
     if((e.ctrlKey && e.keyCode==81) || (e.ctrlKey && e.keyCode==73)){
       setModalShowAlways(true)
@@ -87,7 +86,7 @@ function App(props) {
   return (
     <div className="tl-helper-chrome-extension-frame">
       <div className="tl-tip" onClick={onMouseOver}>T</div>
-      <div className="tiplevel" onMouseOver={onMouseOver} ></div>
+      <div className="tiplevel" onMouseOver={onMouseOver} onClick={onMouseOver}></div>
       <div className={`tl-container ${(modalShowAlways || modalShow) ? 'tl-modalShow' : ''}`} onMouseLeave={onMouseLeave} onClick={() => setModalShowAlways(true)}>
         <div className="tl-header fl fr blueColor w100" >
           <div className='header-menu-icon'>
