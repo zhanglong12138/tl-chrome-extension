@@ -4,165 +4,168 @@
 }
 
 //------flex布局--------
+.tl-helper-chrome-extension-frame{
 
-.w100 {
-  width: 100%;
-}
-.h100 {
-  height: 100%;
-}
-
-.fl {
-  display: flex;
-}
-
-.fr {
-  flex-direction: row;
-}
-
-.fc {
-  flex-direction: column;
-}
-
-.fw {
-  flex-wrap: wrap;
-}
-
-.f1,.flex1 {
-  flex: 1;
-}
-
-.fac {
-  align-items: center;
-}
-
-.fafe {
-  align-items: flex-end;
-}
-
-.fafs {
-  align-items: flex-start;
-}
-
-.fjc {
-  justify-content: center;
-}
-
-.fje {
-  justify-content: flex-end;
-}
-
-.fjs {
-  justify-content: flex-start;
-}
-
-.fjsb {
-  justify-content: space-between;
-}
-
-.fjsa {
-  justify-content: space-around;
-}
-
-.fass {
-  align-self: flex-start;
-}
-
-.fase {
-  align-self: flex-end;
-}
-
-.relative {
-  position: relative;
-}
-
-.textleft {
-  text-align: left;
-}
-
-.textright {
-  text-align: right;
-}
-
-.red {
-  color: red;
-}
-
-.blueColor {
-  color: #1677ff;
-}
-
-.white {
-  color: white;
-}
-
-.black {
-  color: #262626;
-}
-
-.oneline {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.twoline {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  text-overflow: ellipsis;
-}
-
-.threeline {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  text-overflow: ellipsis;
-}
-
-.bsbb,.borderbox {
-  box-sizing: border-box;
-}
-
-.noScroll {
-  &::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    border: 0;
+  .w100 {
+    width: 100%;
   }
+  .h100 {
+    height: 100%;
+  }
+  
+  .fl {
+    display: flex;
+  }
+  
+  .fr {
+    flex-direction: row;
+  }
+  
+  .fc {
+    flex-direction: column;
+  }
+  
+  .fw {
+    flex-wrap: wrap;
+  }
+  
+  .f1,.flex1 {
+    flex: 1;
+  }
+  
+  .fac {
+    align-items: center;
+  }
+  
+  .fafe {
+    align-items: flex-end;
+  }
+  
+  .fafs {
+    align-items: flex-start;
+  }
+  
+  .fjc {
+    justify-content: center;
+  }
+  
+  .fje {
+    justify-content: flex-end;
+  }
+  
+  .fjs {
+    justify-content: flex-start;
+  }
+  
+  .fjsb {
+    justify-content: space-between;
+  }
+  
+  .fjsa {
+    justify-content: space-around;
+  }
+  
+  .fass {
+    align-self: flex-start;
+  }
+  
+  .fase {
+    align-self: flex-end;
+  }
+  
+  .relative {
+    position: relative;
+  }
+  
+  .textleft {
+    text-align: left;
+  }
+  
+  .textright {
+    text-align: right;
+  }
+  
+  .red {
+    color: red;
+  }
+  
+  .blueColor {
+    color: #1677ff;
+  }
+  
+  .white {
+    color: white;
+  }
+  
+  .black {
+    color: #262626;
+  }
+  
+  .oneline {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .twoline {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+  }
+  
+  .threeline {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+  }
+  
+  .bsbb,.borderbox {
+    box-sizing: border-box;
+  }
+  
+  .noScroll {
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      border: 0;
+    }
+  }
+  
+  .btnHover {
+    opacity: 0.3;
+  }
+  .relaitve {
+    position: relative;
+  }
+  
+  .absolute {
+    position: absolute;
+  }
+  
+  .top0 {
+    top: 0;
+  }
+  
+  .bottom0 {
+    bottom: 0;
+  }
+  
+  .left0 {
+    left: 0;
+  }
+  
+  .right0 {
+    right: 0;
+  }
+  
+  .greyColor {
+    color: #666;
+  }
+  
+  //---------------------------
+  
 }
-
-.btnHover {
-  opacity: 0.3;
-}
-.relaitve {
-  position: relative;
-}
-
-.absolute {
-  position: absolute;
-}
-
-.top0 {
-  top: 0;
-}
-
-.bottom0 {
-  bottom: 0;
-}
-
-.left0 {
-  left: 0;
-}
-
-.right0 {
-  right: 0;
-}
-
-.greyColor {
-  color: #666;
-}
-
-//---------------------------
