@@ -1,11 +1,22 @@
-import { useEffect, useState, useContext,useMemo } from "react";
+import { useEffect, useState, useContext,useMemo,forwardRef ,useImperativeHandle,useRef} from "react";
 import {Form, Input, Button,Divider, Typography, Card, Tag, Space,message } from 'antd'
 
 import globalContext from '../../store/index'
-export default function Note() {
-  useEffect(() => {
-    console.log("NOTE loaded");
-  }, []);
+import { set } from "mobx";
+const  Note = (props,ref)=> {
+  //外接方法
+  useImperativeHandle(ref, () => ({
+    search(){
+      setEditStatus(false)
+      searchRef.current?.focus()
+    },
+    editRedictly(){
+      setEditStatus(true)
+      editRef.current?.focus()
+    }
+  }));
+  const searchRef = useRef(null)
+  const editRef = useRef(null)
   const globalContextEntity = useContext(globalContext)
   const [formRef] = Form.useForm();
   const [data, setData] = useState([])
@@ -71,7 +82,7 @@ export default function Note() {
     {editStatus && <div className="component-edit">
         <Form form={editFormRef} labelAlign="left" size="middle" layout="vertical">
           <Form.Item name="key">
-            <Input placeholder="记录项"/>
+            <Input ref={editRef} placeholder="记录项"/>
           </Form.Item>
           <Form.Item name="value">
             <Input.TextArea placeholder="记录值" onPressEnter={handleInsertEvent}/>
@@ -85,7 +96,7 @@ export default function Note() {
       {!editStatus && <>
         <Form form={formRef} labelAlign="left" size="middle" layout="inline">
           <Form.Item name="keywords">
-            <Input placeholder="请输入关键词" onPressEnter={handleEnter}/>
+            <Input ref={searchRef} placeholder="请输入关键词" onPressEnter={handleEnter}/>
           </Form.Item>
           
           <Space>
@@ -133,3 +144,5 @@ export default function Note() {
       </>}
   </div>
 }
+
+export default forwardRef(Note)

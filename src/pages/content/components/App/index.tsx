@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo,useContext } from 'react'
+import { useState, useEffect, useMemo,useContext, useRef } from 'react'
 import logo from '@assets/img/logo.png'
 import type { MenuProps } from 'antd';
 import { Dropdown, Space, Modal} from 'antd';
@@ -11,6 +11,27 @@ import globalContext from '../../store/index'
 
 function App(props) {
   const globalContextEntity = useContext(globalContext)
+  //快捷操作
+  useEffect(() => {
+    console.log("NOTE loaded");
+    window.addEventListener('keydown', handleKeyDown);
+  }, []);
+  const noteRef = useRef(null)
+  const handleKeyDown = (e)=>{
+    console.log(e)
+    //Ctrl+Q 或 Ctrl + I 新增操作
+    if((e.ctrlKey && e.keyCode==81) || (e.ctrlKey && e.keyCode==73)){
+      setModalShowAlways(true)
+      setPanelType('note')
+      noteRef.current.search()
+    }
+    //Ctrl+Shift+F 或 Ctrl+Alt+Q 查询操作
+    if((e.ctrlKey && e.shiftKey && e.keyCode==70) || (e.ctrlKey && e.altKey && e.keyCode==81)){
+      setModalShowAlways(true)
+      setPanelType('note')
+      noteRef.current.editRedictly()
+    }
+  }
   //modal显示逻辑
   const [modalShow, setModalShow] = useState(false)
   const [modalShowAlways, setModalShowAlways] = useState(false)
@@ -79,7 +100,7 @@ function App(props) {
         </div>
         <div className='component-body w100' >
           { panelType=='setting' && <Login returnNote={returnNote} />}
-          { panelType=='note' && <Note />}
+          { panelType=='note' && <Note ref={ref=>noteRef.current = ref}/>}
           { panelType=='help' && <Help returnNote={returnNote} />}
         </div>
       </div>
