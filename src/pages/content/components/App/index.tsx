@@ -11,30 +11,7 @@ import globalContext from '../../store/index'
 
 function App(props) {
   const globalContextEntity = useContext(globalContext)
-  //快捷操作
-  useEffect(() => {
-    console.log("NOTE loaded");
-    window.addEventListener('keydown', handleKeyDown);
-  }, []);
   const noteRef = useRef(null)
-  const handleKeyDown = (e)=>{
-    //Ctrl+Q 或 Ctrl + I 新增操作
-    if((e.ctrlKey && e.keyCode==81) || (e.ctrlKey && e.keyCode==73)){
-      if(modalShowAlways){
-        setModalShowAlways(false)
-        return
-      }
-      setModalShowAlways(true)
-      setPanelType('note')
-      noteRef.current.search()
-    }
-    //Ctrl+Shift+F 或 Ctrl+Alt+Q 查询操作
-    if((e.ctrlKey && e.shiftKey && e.keyCode==70) || (e.ctrlKey && e.altKey && e.keyCode==81)){
-      setModalShowAlways(true)
-      setPanelType('note')
-      noteRef.current.editRedictly()
-    }
-  }
   //modal显示逻辑
   const [modalShow, setModalShow] = useState(false)
   const [modalShowAlways, setModalShowAlways] = useState(false)
@@ -52,6 +29,34 @@ function App(props) {
     setModalShowAlways(false)
     setModalShow(false)
   }
+  
+  //快捷操作
+  useEffect(() => {
+    console.log("NOTE loaded");
+    const handleKeyDown = (e)=>{
+      //Ctrl+Q 或 Ctrl+I 新增操作
+      if((e.ctrlKey && e.keyCode==81) || (e.ctrlKey && e.keyCode==73)){
+        console.log('Ctrl+Q 或 Ctrl + I 新增操作',modalShowAlways)
+        if(modalShowAlways){
+          setModalShowAlways(false)
+          return
+        }
+        setModalShowAlways(true)
+        setPanelType('note')
+        noteRef.current.editRedictly()
+      }
+      //Ctrl+Alt+F 或 Shilt+Alt+Q 查询操作
+      if((e.ctrlKey && e.altKey && e.keyCode==70) || (e.shiftKey && e.altKey && e.keyCode==81)){
+        setModalShowAlways(true)
+        setPanelType('note')
+        noteRef.current.search()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [modalShowAlways]);
 
   //panel显示逻辑
   const [panelType, setPanelType] = useState<'setting' | 'note' | 'help'>('note')

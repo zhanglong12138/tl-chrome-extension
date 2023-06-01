@@ -8,11 +8,15 @@ const  Note = (props,ref)=> {
   useImperativeHandle(ref, () => ({
     search(){
       setEditStatus(false)
-      searchRef.current?.focus()
+      setTimeout(()=>{
+        searchRef.current?.focus()
+      },300)
     },
     editRedictly(){
       setEditStatus(true)
-      editRef.current?.focus()
+      setTimeout(()=>{
+        editRef.current?.focus()
+      },300)
     }
   }));
   const searchRef = useRef(null)
