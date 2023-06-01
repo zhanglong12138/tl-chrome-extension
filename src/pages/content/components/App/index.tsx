@@ -34,6 +34,7 @@ function App(props) {
   useEffect(() => {
     console.log("NOTE loaded");
     const handleKeyDown = (e)=>{
+      console.log(e)
       //Ctrl+Q 或 Ctrl+I 新增操作
       if((e.ctrlKey && e.keyCode==81) || (e.ctrlKey && e.keyCode==73)){
         console.log('Ctrl+Q 或 Ctrl + I 新增操作',modalShowAlways)

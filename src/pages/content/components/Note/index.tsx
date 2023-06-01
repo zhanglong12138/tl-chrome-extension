@@ -61,6 +61,12 @@ const  Note = (props,ref)=> {
   //新增记录
   const [editFormRef] = Form.useForm();
   const [editStatus, setEditStatus] = useState(false)
+  const onInput = (e)=>{
+    console.log(e)
+    if(e.ctrlKey && e.keyCode==13){
+      handleInsertEvent()
+    }
+  }
   const handleInsertEvent = async ()=>{
     const formData = await editFormRef.validateFields()
     const res = await globalContextEntity.postx({
@@ -89,7 +95,7 @@ const  Note = (props,ref)=> {
             <Input ref={editRef} placeholder="记录项"/>
           </Form.Item>
           <Form.Item name="value">
-            <Input.TextArea placeholder="记录值" onPressEnter={handleInsertEvent}/>
+            <Input.TextArea placeholder="记录值" onKeyDown={onInput}/>
           </Form.Item>
           <Space>
             <Button type="primary" key="submit" onClick={handleInsertEvent}>提交</Button>
