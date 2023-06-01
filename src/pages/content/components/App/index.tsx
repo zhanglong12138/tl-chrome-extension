@@ -86,7 +86,7 @@ function App(props) {
   return (
     <div className="tl-helper-chrome-extension-frame">
       <div className="tl-tip" onClick={onMouseOver}>T</div>
-      <div className="tiplevel" onMouseOver={onMouseOver} onClick={onMouseOver}></div>
+      <div className="tiplevel" onMouseOver={onMouseOver}></div>
       <div className={`tl-container ${(modalShowAlways || modalShow) ? 'tl-modalShow' : ''}`} onMouseLeave={onMouseLeave} onClick={() => setModalShowAlways(true)}>
         <div className="tl-header fl fr blueColor w100" >
           <div className='header-menu-icon'>
