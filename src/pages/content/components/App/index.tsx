@@ -109,7 +109,7 @@ function App(props) {
         </div>
         <div className='component-body w100' >
           { panelType=='setting' && <Login returnNote={returnNote} />}
-          { panelType=='note' && <Note ref={ref=>noteRef.current = ref}/>}
+          { panelType=='note' && <Note ref={ref=>noteRef.current = ref} setModalShowAlways={setModalShowAlways}/>}
           { panelType=='help' && <Help returnNote={returnNote} />}
         </div>
       </div>

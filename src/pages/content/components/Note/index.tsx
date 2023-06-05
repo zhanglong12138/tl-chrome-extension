@@ -81,6 +81,7 @@ const  Note = (props,ref)=> {
       message.success('提交成功')
       editFormRef.resetFields()
       setEditStatus(false)
+      props?.setModalShowAlways && props.setModalShowAlways(false)
     }else{
       message.error(res?.message || '操作失败')
     }
