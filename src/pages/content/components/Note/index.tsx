@@ -96,7 +96,7 @@ const  Note = (props,ref)=> {
             <Input ref={editRef} placeholder="记录项"/>
           </Form.Item>
           <Form.Item name="value">
-            <Input.TextArea placeholder="记录值" onKeyDown={onInput}/>
+            <Input.TextArea placeholder="记录值" onKeyDown={onInput} style={{minHeight:180}}/>
           </Form.Item>
           <Space>
             <Button type="primary" key="submit" onClick={handleInsertEvent}>提交</Button>
