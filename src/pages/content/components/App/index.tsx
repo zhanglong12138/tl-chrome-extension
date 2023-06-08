@@ -46,8 +46,8 @@ function App(props) {
         setPanelType('note')
         noteRef.current.editRedictly()
       }
-      //Ctrl+Alt+F 或 Shilt+Alt+Q 查询操作
-      if((e.ctrlKey && e.altKey && e.keyCode==70) || (e.shiftKey && e.altKey && e.keyCode==81)){
+      //Ctrl+Alt+F 或 Shilt+Alt+F  查询操作
+      if((e.ctrlKey && e.altKey && e.keyCode==70) || (e.shiftKey && e.altKey && e.keyCode==70)){
         setModalShowAlways(true)
         setPanelType('note')
         noteRef.current.search()
