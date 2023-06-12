@@ -23,7 +23,6 @@ const handleSendMessage = async (action:string, data:String | any, callback:Func
     result = removeIStorageSync(data)
   }
   if(callback){
-    console.log(callback)
     callback(result)
   }else{
     return result
