@@ -125,7 +125,7 @@ const  Note = (props,ref)=> {
                 borderRadius:0
               }}>
                 <a href={"http://blog.zxlucky.com/art?id="+e.id} target="_blank">
-                  <Typography.Text strong style={{whiteSpace:'pre-wrap'}}>{e.name}</Typography.Text>
+                  <Typography.Text strong>{e.name}</Typography.Text>
                 </a>
                 <div className="fl fr" style={{margin:'8px 0'}}>
                   <div><Tag>文章</Tag></div>
@@ -136,6 +136,7 @@ const  Note = (props,ref)=> {
             }
             if(e.contentType=='note'){
               return <Card size="small" style={{
+                  whiteSpace:'pre-wrap',
                   boxShadow:'0 0 10px #eee',
                   marginBottom:'20px',
                   borderRadius:0
