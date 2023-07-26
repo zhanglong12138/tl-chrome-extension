@@ -32,11 +32,11 @@ function App(props) {
   
   //快捷操作
   useEffect(() => {
-    console.log("NOTE loaded");
+    // console.log("NOTE loaded");
     const handleKeyDown = (e)=>{
       //Ctrl+Q 或 Ctrl+I 新增操作
       if((e.ctrlKey && e.keyCode==81) || (e.ctrlKey && e.keyCode==73)){
-        console.log('Ctrl+Q 或 Ctrl + I 新增操作',modalShowAlways)
+        // console.log('Ctrl+Q 或 Ctrl + I 新增操作',modalShowAlways)
         if(modalShowAlways){
           setModalShowAlways(false)
           return
@@ -44,6 +44,8 @@ function App(props) {
         setModalShowAlways(true)
         setPanelType('note')
         noteRef.current.editRedictly()
+        // chrome.experimental.sidebar.show();
+        // console.log('chrome.experimental.sidebar.show();',chrome)
       }
       //Ctrl+Alt+F 或 Shilt+Alt+F  查询操作
       if((e.ctrlKey && e.altKey && e.keyCode==70) || (e.shiftKey && e.altKey && e.keyCode==70)){

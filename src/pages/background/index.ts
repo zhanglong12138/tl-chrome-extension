@@ -1,5 +1,6 @@
 import reloadOnUpdate from "virtual:reload-on-update-in-background-script";
 
+console.log("background loaded",chrome);
 reloadOnUpdate("pages/background");
 
 /**
@@ -8,4 +9,4 @@ reloadOnUpdate("pages/background");
  */
 reloadOnUpdate("pages/content/style.scss");
 
-console.log("background loaded");
+console.log("background loaded",chrome);

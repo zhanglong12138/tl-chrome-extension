@@ -1,4 +1,4 @@
-console.log("content loadedx");
+// console.log("content loadedx");
 
 /**
  * @description
@@ -6,3 +6,6 @@ console.log("content loadedx");
  */
 import("./app");
 // import("./../options/index");
+
+
+// console.log(chrome)

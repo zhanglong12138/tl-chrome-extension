@@ -21,6 +21,10 @@ const manifest: chrome.runtime.ManifestV3 = {
   // chrome_url_overrides: {
   //   newtab: "src/pages/newtab/index.html",
   // },
+  side_panel:{
+    default_path: "src/pages/popup/index.html",
+    openPanelOnActionClick: true,
+  },
   icons: {
     "16": "16.png",
     "32": "32.png",
